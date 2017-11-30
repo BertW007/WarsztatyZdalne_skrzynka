@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+</head>
+<title>
+    {% if email.id %}
+    Edytuj numer telefonu
+    {% else %}
+    Dodaj telefon
+    {% endif %}
+</title>
+<body>
+    <form action='' method="POST">
+        <label>Adres</label>
+        <input type="text" name="address" {% if email.id %} value="{{email.address}}" {% endif %}>
+        <label>Rodzaj</label>
+        <input type="text" name="type" {% if email.id %} value="{{email.type}}" {% endif %}>
+        <input type="submit" value="Zapisz">
+    </form>
+</body>
+</html>

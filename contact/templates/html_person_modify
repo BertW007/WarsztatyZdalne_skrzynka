@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+</head>
+<body>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Imię</th>
+                    <td>{{ person.first_name }}</td>
+                    <td rowspan="2"><a href="/person/modify/{{person.id}}">Edytuj</a></td>
+                </tr>
+                <tr>
+                    <th>Nazwisko</th>
+                    <td>{{ person.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Adres:</th>
+                    <td>{% for address in addresses %}
+                        {{ address.city }}, {{ address.street }} {{ address.street_number }}/{{ address.home_number }}<br>
+                        {% endfor %}
+                        <a href="/person/{{person.id}}/address/add">Dodaj</a>
+                    </td>
+                    <td class="top_align">{% for address in addresses %}
+                        <a href="/person/{{person.id}}/address/{{address.id}}/modify">Edytuj</a> <a href="/person/{{person.id}}/address/{{address.id}}/delete">Usuń</a><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Telefon:</th>
+                    <td>{% for telephone in telephones %}
+                        {{ telephone.number }} {{ telephone.type }}<br>
+                        {% endfor %}
+                        <a href="/person/{{person.id}}/telephone/add">Dodaj</a>
+                    </td>
+                    <td class="top_align">{% for telephone in telephones %}
+                        <a href="/person/{{person.id}}/telephone/{{telephone.id}}/modify">Edytuj</a> <a href="/person/{{person.id}}/telephone/{{telephone.id}}/delete">Usuń</a><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>{% for email in emails %}
+                        {{ email.address }} {{ email.type }}<br>
+                        {% endfor %}
+                        <a href="/person/{{person.id}}/email/add">Dodaj</a>
+                    </td>
+                    <td class="top_align">{% for email in emails %}
+                        <a href="/person/{{person.id}}/email/{{email.id}}/modify">Edytuj</a> <a href="/person/{{person.id}}/email/{{email.id}}/delete">Usuń</a><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Grupy:</th>
+                    <td>{% for group in groups %}
+                        {{ group.name }}<br>
+                        {% endfor %}
+                        <a href="/person/{{person.id}}/group/add">Dodaj</a>
+                    </td>
+                    <td class="top_align">{% for group in groups %}
+                        <a href="/person/{{person.id}}/group/{{group.id}}/remove">Usuń</a><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><a href="/show/{{person.id}}">Gotowe</a></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

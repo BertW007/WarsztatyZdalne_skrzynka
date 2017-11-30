@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+</head>
+<title>
+    {% if person.id %}
+    Edytuj dane
+    {% else %}
+    Dodaj kontakt
+    {% endif %}
+</title>
+<body>
+    <form action='' method="POST">
+        <label>Imię</label>
+        <input type="text" name="first_name" {% if person.id %} value="{{person.first_name}}" {% endif %}>
+        <label>Nazwisko</label>
+        <input type="text" name="last_name" {% if person.id %} value="{{person.last_name}}" {% endif %}>
+        <input type="submit" value="Zapisz">
+    </form>
+</body>
+</html>

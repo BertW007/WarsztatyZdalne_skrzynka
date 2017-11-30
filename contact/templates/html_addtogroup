@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+</head>
+<title>
+    Dodaj do grupy
+</title>
+<body>
+    <form action='' method="POST">
+        <label>Dodaj do grupy:</label>
+        <select name="group_id">
+            <option selected disabled>- Wybierz grupę -</option>
+            {% for group in groups %}
+            <option value="{{group.id}}">{{group.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Zapisz">
+    </form>
+    <table>
+        <tr>
+            <td colspan="3"><a href="/person/{{person_id}}/group/create">Utwórz grupę</a></td>
+        </tr>
+    </table>
+</body>
+</html>

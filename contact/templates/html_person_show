@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+</head>
+<body>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Imię</th>
+                    <td>{{ person.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Nazwisko</th>
+                    <td>{{ person.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Adres:</th>
+                    <td>{% for address in addresses %} {{ address.city }}, {{ address.street }} {{ address.street_number }}/{{ address.home_number }}<br>{% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>Telefon:</th>
+                    <td>{% for telephone in telephones %} {{ telephone.number }} {{ telephone.type }}<br>{% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>{% for email in emails %} {{ email.address }} {{ email.type }}<br>{% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>Grupy:</th>
+                    <td>{% for group in groups %} {{ group.name }}<br>{% endfor %}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><a href="/modify/{{person.id}}">Edytuj dane</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><a href="/">Lista kontaktów</a></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

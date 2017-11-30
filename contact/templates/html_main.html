@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+</head>
+<title>
+    Kontakty
+</title>
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwisko</th>
+                    <th>Imię</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in people %}
+                <tr>
+                    <td>{{ person.last_name }}</td>
+                    <td><a href="/show/{{person.id}}">{{ person.first_name }}</a></td>
+                    <td><a href="/modify/{{person.id}}">Edytuj</a></td>
+                    <td><a href="/delete/{{person.id}}">Usuń</a></td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4">
+                        <form class="list_form" action="" method="post">
+                            <select name="group_id">
+                                <option selected disabled>- Wybierz grupę -</option>
+                                {% for group in groups %}
+                                <option value="{{group.id}}">{{group.name}}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="submit" value="Wyświetl">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <form class="list_form" action="" method="post">
+                            <label>Wyszukaj osobę:</label>
+                            <input type="text" name="search_person">
+                            <input type="submit" value="Szukaj">
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4"><a href="/person/new">Dodaj osobę</a></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><a href="/">Wyświetl wszystkich</a></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

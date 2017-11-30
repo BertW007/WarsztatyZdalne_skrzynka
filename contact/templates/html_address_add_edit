@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+</head>
+<title>
+    {% if address.id %}
+    Edytuj adres
+    {% else %}
+    Dodaj adres
+    {% endif %}
+</title>
+<body>
+    <form action='' method="POST">
+        <label>Miasto</label>
+        <input type="text" name="city" {% if address.id %} value="{{address.city}}" {% endif %}>
+        <label>Ulica</label>
+        <input type="text" name="street" {% if address.id %} value="{{address.street}}" {% endif %}>
+        <label>Numer domu</label>
+        <input type="text" name="street_number" {% if address.id %} value="{{address.street_number}}" {% endif %}>
+        <label>Numer mieszkania</label>
+        <input type="text" name="home_number" {% if address.id %} value="{{address.home_number}}" {% endif %}>
+        <input type="submit" value="Zapisz">
+    </form>
+</body>
+</html>
