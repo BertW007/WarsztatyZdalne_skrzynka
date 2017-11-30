@@ -35,7 +35,7 @@
                                 <option value="{{group.id}}">{{group.name}}</option>
                                 {% endfor %}
                             </select>
-                            <input type="submit" value="Wyświetl">
+                            <input type="submit" name="show_group" value="Wyświetl">
                         </form>
                     </td>
                 </tr>
@@ -44,7 +44,7 @@
                         <form class="list_form" action="" method="post">
                             <label>Wyszukaj osobę:</label>
                             <input type="text" name="search_person">
-                            <input type="submit" value="Szukaj">
+                            <input type="submit" name="show_person" value="Szukaj">
                         </form>
                     </td>
                 </tr>

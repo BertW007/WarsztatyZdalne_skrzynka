@@ -11,14 +11,19 @@ from contact.models import Person, Address, Telephone, Email, Group
 @method_decorator(csrf_exempt, name='dispatch')
 class Main(View):
 
-    def get(self, request, group_id=None):
-        if group_id:
+    def get(self, request):
+        people = Person.objects.order_by('last_name', 'first_name')
+        groups = Group.objects.order_by('name')
+        return render(request, 'html_main.html', {'people': people,
+                                                  'groups': groups})
+
+    def post(self, request):
+        if "show_group" in request.POST:
+            group_id = request.POST.get("group_id")
             return self.get_groups(request, group_id)
-        else:
-            people = Person.objects.order_by('last_name', 'first_name')
-            groups = Group.objects.order_by('name')
-            return render(request, 'html_main.html', {'people': people,
-                                                      'groups': groups})
+        elif "show_person" in request.POST:
+            search_string = request.POST.get("search_person")
+            return self.search(request, search_string)
 
     def get_groups(self, request, group_id):
         group = Group.objects.get(pk=int(group_id))
@@ -32,21 +37,17 @@ class Main(View):
         query = search_string.split()
         people = []
         for term in query:
-            people_found = Person.objects.filter(
+            people = Person.objects.filter(
                 Q(first_name__icontains=term) |
-                Q(last_name__icontains=term))
-            for person in people_found:
-                people.append(person)
+                Q(last_name__icontains=term))\
+                .order_by('last_name', 'first_name')
+        # Jeśli chcemy wyszukiwać OR, należy zmienić nazwy zmiennych
+        # i dodać poniższe linijki. Problem pozostaje z posortowaniem
+        # uzyskanych wyników.
+            # for person in people_found:
+            #     people.add(person)
         return render(request, 'html_main.html', {'people': people,
                                                   'groups': groups})
-
-    def post(self, request, group_id=None):
-        if request.POST.get("group_id"):
-            group_id = request.POST.get("group_id")
-            return HttpResponseRedirect('/group/' + group_id)
-        elif request.POST.get("search_person"):
-            search_string = request.POST.get("search_person")
-            return self.search(request, search_string)
 
 
 def show_person(request, person_id):

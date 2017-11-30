@@ -19,8 +19,7 @@ from contact.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'(^$|^group/(?P<group_id>(\d)+$))', Main.as_view()),
-    url(r'^search/$', Main.as_view()),
+    url(r'^$', Main.as_view()),
     url(r'^show/(?P<person_id>(\d)+$)', show_person),
     url(r'^modify/(?P<person_id>(\d)+$)', modify_person),
     url(r'^person/new$', AddEditPerson.as_view()),
